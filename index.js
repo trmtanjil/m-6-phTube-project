@@ -12,11 +12,46 @@ function LoadCategories()  {
 function loadVideo(){
 fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then(res=>res.json())
-    .then(data=>console.log(data))
+    .then(data=>deteltsLoadVideos(data.videos))
 }
 
-function deteltsLoadVideos(thumbnail){
-console.log(thumbnail);
+function deteltsLoadVideos(videos){
+for(let detelVoade of videos){
+   const detailVedioContainer=document.getElementById('detailVedioContainers')
+
+ const detailVedioCreatContainers =  document.createElement('div')
+
+ detailVedioCreatContainers.innerHTML=`
+    <div id="detailVedioContainers" class="card bg-base-100 w-56 shadow-sm">
+        <figure class="relative">
+        <p class="absolute bottom-0 right-0 bg-black text-white text-[12px] rounded-sm p-[2px] mr-2 mb-2">3hrs 56 minn ago</p>
+          <img
+            src="${detelVoade.thumbnail}" />
+        </figure>
+        <div class="card-body">
+         <div class="flex gap-3">
+          <div class="avatar">
+            <div class="ring-primary ring-offset-base-100 w-6 rounded-full ring ring-offset-2">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            </div>
+            </div>
+            <h2 class="card-title">${detelVoade.title}</h2>
+         </div>
+         <div class="flex">
+            <p class="">awlad hosain</p>
+           <span> <i class="fa-solid fa-certificate text-green-600"></i></span>
+         </div>
+         <div>
+            <p>91k Views</p>
+         </div>
+          <!-- <div class="card-actions justify-end">
+            <button class="btn btn-primary">Buy Now</button>
+          </div> -->
+        </div>
+      </div>
+ `;
+ detailVedioContainer.appendChild(detailVedioCreatContainers)
+}
 }
 
 
@@ -66,3 +101,4 @@ function deteltsCategorys(categories){
 
 
 LoadCategories()
+loadVideo()
