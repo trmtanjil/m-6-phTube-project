@@ -61,8 +61,20 @@ document.getElementById('Vidieo_details').showModal();
 const ShowDetails= document.getElementById('ShowDetails');
 
 ShowDetails.innerHTML=`
-<h2>${video.title}</h2>
-`
+<div class="card bg-base-100 image-full   shadow-sm">
+  <figure>
+    <img
+      src="${video.thumbnail}" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">${video.title}</h2>
+    <p>${video.description}</p>
+    <div class="card-actions justify-end">
+      
+    </div>
+  </div>
+</div>
+`;
 }
 
 function deteltsLoadVideos(videos){
