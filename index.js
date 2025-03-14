@@ -40,11 +40,29 @@ const LoadCategoryVideos = (id)=>{
 
     const clickedbutton = document.getElementById(`btn-${id}`);
     clickedbutton.classList.add('active');
-    console.log(clickedbutton);
     deteltsLoadVideos(data.category)
   })
 
   
+}
+const loadVideoDetails=(videioId)=>{
+console.log(videioId);
+const url = `https://openapi.programming-hero.com/api/phero-tube/video/${videioId}`;
+fetch(url)
+.then(res=>res.json())
+.then(data=>loadetailsVideio(data.
+  video
+  ))
+}
+const loadetailsVideio =(video)=>{
+console.log(video);
+document.getElementById('Vidieo_details').showModal();
+
+const ShowDetails= document.getElementById('ShowDetails');
+
+ShowDetails.innerHTML=`
+<h2>${video.title}</h2>
+`
 }
 
 function deteltsLoadVideos(videos){
@@ -91,6 +109,7 @@ for(let detelVoade of videos){
          <p class="text-sm text-gray-400">${detelVoade.others.views} views</p>
 
         </div>
+      <button onclick=loadVideoDetails('${detelVoade.video_id}') class="btn btn-block">Show deteils</button>
       </div>
    
  `;
@@ -98,30 +117,6 @@ for(let detelVoade of videos){
 }
 }
 
-
-// {
-//     "status": true,
-//     "message": "successfully fetched all the videos",
-//     "videos": [
-//     {
-//     "category_id": "1001",
-//     "video_id": "aaaa",
-//     "thumbnail": "https://i.ibb.co/L1b6xSq/shape.jpg",
-//     "title": "Shape of You",
-//     "authors": [
-//     {
-//     "profile_picture": "https://i.ibb.co/D9wWRM6/olivia.jpg",
-//     "profile_name": "Olivia Mitchell",
-//     "verified": ""
-//     }
-//     ],
-//     "others": {
-//     "views": "100K",
-//     "posted_date": "16278"
-//     },
-//     "description": "Dive into the rhythm of 'Shape of You,' a captivating track that blends pop sensibilities with vibrant beats. Created by Olivia Mitchell, this song has already gained 100K views since its release. With its infectious melody and heartfelt lyrics, 'Shape of You' is perfect for fans looking for an uplifting musical experience. Let the music take over as Olivia's vocal prowess and unique style create a memorable listening journey."
-//     },
-//     {
 
 function deteltsCategorys(categories){
     const categoriContainer = document.getElementById('Categories_btn');
@@ -134,12 +129,6 @@ function deteltsCategorys(categories){
    categoriContainer.appendChild(categoryDiv);
   }
 }
-
-// {
-//     "category_id": "1001",
-//     "category": "Music"
-//     },
-
  
 
 
