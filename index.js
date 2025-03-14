@@ -15,9 +15,17 @@ fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then(data=>deteltsLoadVideos(data.videos))
 }
 
+const LoadCategoryVideos = (id)=>{
+  const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
+  fetch(url)
+  .then(res=>res.json())
+  .then(data=>deteltsLoadVideos(data.category))
+}
+
 function deteltsLoadVideos(videos){
+  const detailVedioContainer=document.getElementById('detailVedioContainers')
+  detailVedioContainer.innerHTML='';
 for(let detelVoade of videos){
-   const detailVedioContainer=document.getElementById('detailVedioContainers')
 
  const detailVedioCreatContainers =  document.createElement('div')
 
@@ -85,7 +93,7 @@ function deteltsCategorys(categories){
   for(let categori of categories){
    const categoryDiv = document.createElement('div');
    categoryDiv.innerHTML=`
-     <button class="btn btn-sm">${categori.category}</button>
+     <button onclick="LoadCategoryVideos(${categori.category_id})" class="btn btn-sm">${categori.category}</button>
    `;
    categoriContainer.appendChild(categoryDiv);
   }
@@ -101,4 +109,3 @@ function deteltsCategorys(categories){
 
 
 LoadCategories()
-loadVideo()
