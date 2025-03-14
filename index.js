@@ -1,3 +1,12 @@
+function removeClass (){
+  const activeButtons = document.getElementsByClassName('active')
+
+
+  for(let btn of activeButtons){
+    btn.classList.remove('active')
+  }
+}
+
 
 // Categories-btn strt 
 
@@ -12,26 +21,53 @@ function LoadCategories()  {
 function loadVideo(){
 fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then(res=>res.json())
-    .then(data=>deteltsLoadVideos(data.videos))
+    .then(data=>{
+      removeClass()
+      document.getElementById('active-Class').classList.add('active')
+      deteltsLoadVideos(data.videos)
+    })
 }
 
 const LoadCategoryVideos = (id)=>{
   const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
+  // btn.classList.remove('active')
+
   fetch(url)
   .then(res=>res.json())
-  .then(data=>deteltsLoadVideos(data.category))
+  .then(data=>{
+
+    removeClass ()
+
+    const clickedbutton = document.getElementById(`btn-${id}`);
+    clickedbutton.classList.add('active');
+    console.log(clickedbutton);
+    deteltsLoadVideos(data.category)
+  })
+
+  
 }
 
 function deteltsLoadVideos(videos){
   const detailVedioContainer=document.getElementById('detailVedioContainers')
+  
   detailVedioContainer.innerHTML='';
+  if(videos.length==0){
+    detailVedioContainer.innerHTML=`
+     <div class="col-span-full text-center flex flex-col items-center">
+     
+        <img class="size-30 " src="./asest/Icon.png" alt="">
+        <h1>Oops!! Sorry, There is no content here</h1>
+    </div>
+    `
+  }
+
 for(let detelVoade of videos){
 
  const detailVedioCreatContainers =  document.createElement('div')
 
  detailVedioCreatContainers.innerHTML=`
  
-   <div class="card bg-base-100 w-[200px] shadow-sm">
+   <div class="card bg-base-100    w-[250px]shadow-sm">
         <figure class="relative">
           <img class="w-full h-[140px] object-cover"
             src="${detelVoade.thumbnail}"
@@ -93,7 +129,7 @@ function deteltsCategorys(categories){
   for(let categori of categories){
    const categoryDiv = document.createElement('div');
    categoryDiv.innerHTML=`
-     <button onclick="LoadCategoryVideos(${categori.category_id})" class="btn btn-sm">${categori.category}</button>
+     <button id="btn-${categori.category_id}" onclick="LoadCategoryVideos(${categori.category_id})" class="btn btn-sm hover:bg-[#ff1f3d] hover:text-white">${categori.category}</button>
    `;
    categoriContainer.appendChild(categoryDiv);
   }

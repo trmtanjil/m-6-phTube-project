@@ -14,7 +14,9 @@
 
     <!-- css -->
     <style>
-
+        .active{
+            background: rgb(252, 18, 18);
+        }
     </style>
 </head>
 <body>
@@ -30,17 +32,21 @@
 
  <nav id="Categories_btn" class="flex justify-center gap-5">
      <div>
-        <button onclick="loadVideo()" class="btn btn-sm">All</button>
+        <button id="active-Class" onclick="loadVideo()" class="btn btn-sm ">All</button>
     </div>
  </nav>
 
- <div id="detailVedioContainers" class="grid grid-cols-4 gap-5 pt-5   mx-auto justify-items-center">
+ <section id="detailVedioContainers" class="grid sm:grid-cols-3 md:grid-cols-4 grid-cols-2 gap-5 pt-5   mx-auto justify-items-center">
    
   
+    <div class="col-span-full text-center flex flex-col items-center">
+     
+        <img class="size-30 " src="./asest/Icon.png" alt="">
+        <h1>Oops!! Sorry, There is no content here</h1>
+    </div>
+    
 
- </div>
-
-
+</section>
 
 
 
